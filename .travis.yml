@@ -1,0 +1,52 @@
+sudo: false
+dist: trusty
+
+language: php
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 7.4snapshot
+      env: WP_TRAVISCI=test-php
+    - php: 7.3
+      env: WP_TRAVISCI=test-php
+    - php: 7.2
+      env: WP_TRAVISCI=test-php
+    - php: 7.2
+      env: WP_TRAVISCI=test-js
+    - php: 7.2
+      env: WP_TRAVISCI=lint
+
+install:
+  - composer install
+  - npm install
+  - npm run build
+
+before_script:
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [ -f ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ]; then
+      phpenv config-rm xdebug.ini
+    else
+      echo "xdebug.ini does not exist"
+    fi
+
+script:
+  - |
+    if [[ "$WP_TRAVISCI" == "test-php" ]] ; then
+      npm run test:php
+    elif [[ "$WP_TRAVISCI" == "test-js" ]] ; then
+      npm run test:js
+    elif [[ "$WP_TRAVISCI" == "lint" ]] ; then
+      npm run lint:php
+      npm run lint:js
+      npm run lint:pkg-json
+    fi
