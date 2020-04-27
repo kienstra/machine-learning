@@ -24,6 +24,9 @@ export default registerBlockType(
 			__( 'Survey', 'easy-survey' ),
 		],
 		attributes: {
+			backgroundColor: {
+				type: 'string',
+			},
 			className: {
 				type: 'boolean',
 			},
@@ -31,6 +34,9 @@ export default registerBlockType(
 				type: 'string',
 			},
 			option2: {
+				type: 'string',
+			},
+			textColor: {
 				type: 'string',
 			},
 			question: {
