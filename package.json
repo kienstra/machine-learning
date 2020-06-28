@@ -71,7 +71,7 @@
     "test:e2e:update-snapshot": "npm run test:e2e -- --updateSnapshot",
     "test:js": "wp-scripts test-unit-js",
     "test:php": "composer test",
-    "typescript": "tsc --noEmit"
+    "typescript": "tsc"
   },
   "husky": {
     "hooks": {
