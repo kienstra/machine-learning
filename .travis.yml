@@ -67,6 +67,7 @@ script:
       npm run lint:php
       npm run lint:js
       npm run lint:pkg-json
+      npm run typescript
     elif [[ "$WP_TRAVISCI" == "test-e2e" ]] ; then
       npm run env start
       npm run test:e2e

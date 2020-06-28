@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import * as React from 'react';
+
+/**
  * WordPress dependencies
  */
 import { useState } from '@wordpress/element';
@@ -8,6 +13,14 @@ import { __ } from '@wordpress/i18n';
  * Internal dependencies
  */
 import { BLOCK_CLASS } from '../constants';
+
+/**
+ * @typedef {Object} ViewProps The Edit component props.
+ * @property {string} className The class name.
+ * @property {string} option1 The first option.
+ * @property {string} option2 The second option.
+ * @property {string} question The survey question.
+ */
 
 /**
  * The Edit component for the block.

@@ -31,7 +31,7 @@ test( 'survey block', async () => {
 	await compareToScreenshot( 'easy-survey/survey' );
 
 	const document = await getDocument( page );
-	const surveyQuestion = 'What is your favorite color?'
+	const surveyQuestion = 'What is your favorite color?';
 	await ( await getByLabelText( document, /survey question/i ) ).focus();
 	await page.keyboard.type( surveyQuestion );
 

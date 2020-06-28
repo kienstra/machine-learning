@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import * as React from 'react';
 
 /**
  * WordPress dependencies
@@ -18,6 +19,16 @@ import {
  * Internal dependencies
  */
 import { BLOCK_CLASS } from '../constants';
+
+/**
+ * @typedef {Object} EditAttributes The block attributes.
+ * @property {string} backgroundColor The background color.
+ * @property {string} className The name of the class.
+ * @property {string} option1 The first option.
+ * @property {string} option2 The second option.
+ * @property {string} textColor The text color.
+ * @property {string} question The question.
+ */
 
 /**
  * The Edit component for the block.
@@ -52,12 +63,14 @@ const Edit = ( {
 					title={ __( 'Color settings', 'easy-survey' ) }
 					colorSettings={ [
 						{
+							// @ts-ignore type declaration is wrong.
 							value: textColor,
 							onChange: ( newValue ) =>
 								setAttributes( { textColor: newValue } ),
 							label: __( 'Text color', 'easy-survey' ),
 						},
 						{
+							// @ts-ignore type declaration is wrong.
 							value: backgroundColor,
 							onChange: ( newValue ) =>
 								setAttributes( { backgroundColor: newValue } ),

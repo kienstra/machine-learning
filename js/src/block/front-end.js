@@ -1,6 +1,11 @@
 /* global easySurveyProps */
 
 /**
+ * External dependencies
+ */
+import * as React from 'react';
+
+/**
  * WordPress dependencies
  */
 import { render } from '@wordpress/element';
@@ -16,6 +21,7 @@ document
 	.querySelectorAll( `.${ BLOCK_CLASS }` )
 	.forEach( ( blockContainer ) => {
 		const instanceId = blockContainer.getAttribute( 'data-block-instance' );
+		// @ts-ignore this is a global variable.
 		const props = easySurveyProps[ instanceId ];
 		if ( ! props ) {
 			return;
