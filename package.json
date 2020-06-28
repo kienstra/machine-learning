@@ -68,7 +68,7 @@
     "test:e2e:interactive": "npm run test:e2e -- --puppeteer-interactive",
     "test:e2e:update-snapshot": "npm run test:e2e -- --updateSnapshot",
     "test:js": "wp-scripts test-unit-js",
-    "test:php": "composer test"
+    "test:php": "composer test -- --do-not-cache-result"
   },
   "husky": {
     "hooks": {
