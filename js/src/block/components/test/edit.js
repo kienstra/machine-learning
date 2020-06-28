@@ -31,7 +31,9 @@ describe( 'Edit', () => {
 		setup( { attributes: { className, option1, option2, question } } );
 
 		[ question, option1, option2 ].forEach( ( attribute ) => {
-			expect( hasText( getComponent().textContent, attribute ) ).toStrictEqual( true );
+			expect(
+				hasText( getComponent().textContent, attribute )
+			).toStrictEqual( true );
 		} );
 	} );
 } );

@@ -31,13 +31,17 @@ describe( 'View', () => {
 		setup( { option1, option2, question } );
 
 		[ question, option1, option2 ].forEach( ( prop ) => {
-			expect( hasText( getComponent().textContent, prop ) ).toStrictEqual( true );
+			expect( hasText( getComponent().textContent, prop ) ).toStrictEqual(
+				true
+			);
 		} );
 	} );
 
 	it( 'does not display the submit message if it is not submitted', () => {
 		setup();
-		expect( hasText( getComponent().textContent, expectedSubmitMessage ) ).toStrictEqual( false );
+		expect(
+			hasText( getComponent().textContent, expectedSubmitMessage )
+		).toStrictEqual( false );
 	} );
 
 	it( 'displays the message when the form is submitted', async () => {
@@ -47,6 +51,8 @@ describe( 'View', () => {
 		const optionButton = screen.getByText( option1 );
 		fireEvent.click( optionButton );
 
-		await expect( hasText( document.body.textContent, expectedSubmitMessage ) ).toStrictEqual( true );
+		await expect(
+			hasText( document.body.textContent, expectedSubmitMessage )
+		).toStrictEqual( true );
 	} );
 } );
