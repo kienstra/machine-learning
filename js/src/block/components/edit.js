@@ -14,6 +14,7 @@ import {
 	InspectorControls,
 	RichText,
 } from '@wordpress/block-editor';
+import { BlockEditProps } from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -33,15 +34,8 @@ import { BLOCK_CLASS } from '../constants';
 /**
  * The Edit component for the block.
  *
- * @param {Object} props The component props.
- * @param {Object} props.attributes The block attributes.
- * @param {string} props.attributes.backgroundColor The background color.
- * @param {string} props.attributes.className The class name.
- * @param {string} props.attributes.option1 The first option.
- * @param {string} props.attributes.option2 The second option.
- * @param {string} props.attributes.textColor The text color.
- * @param {string} props.attributes.question The survey question.
- * @param {Function} props.setAttributes Sets the block's attributes.
+ * @param {BlockEditProps<EditAttributes>} props The component props.
+ * @return {React.ReactElement} The Edit component of the block.
  */
 const Edit = ( {
 	attributes: {
@@ -63,16 +57,18 @@ const Edit = ( {
 					title={ __( 'Color settings', 'easy-survey' ) }
 					colorSettings={ [
 						{
-							// @ts-ignore type declaration is wrong.
+							// @ts-ignore declaration is wrong.
 							value: textColor,
 							onChange: ( newValue ) =>
+								// @ts-ignore declaration is wrong.
 								setAttributes( { textColor: newValue } ),
 							label: __( 'Text color', 'easy-survey' ),
 						},
 						{
-							// @ts-ignore type declaration is wrong.
+							// @ts-ignore declaration is wrong.
 							value: backgroundColor,
 							onChange: ( newValue ) =>
+								// @ts-ignore declaration is wrong.
 								setAttributes( { backgroundColor: newValue } ),
 							label: __( 'Background color', 'easy-survey' ),
 						},

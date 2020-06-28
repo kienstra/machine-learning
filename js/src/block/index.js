@@ -20,7 +20,7 @@ export default registerBlockType( BLOCK_NAME, {
 		'easy-survey'
 	),
 	category: 'common',
-	icon: 'table',
+	icon: 'editor-table',
 	keywords: [ __( 'Survey', 'easy-survey' ) ],
 	attributes: {
 		backgroundColor: {
