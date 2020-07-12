@@ -1,26 +1,23 @@
 #!/bin/bash
 
-lint_files() {
-	linting_command=$1
-	files=$2
-
-	if [ -n "$files" ] && ! $linting_command $files; then
-		exit 1
-	fi
-}
-
-staged_files=$( git diff --staged --diff-filter=d --name-only )
-
-# Lint staged PHP files.
-php_files=$( echo "$staged_files" | grep -E '/*\.php$' )
-lint_files "npm run lint:php" "$php_files"
-npm run test:php
-
-# Lint staged JS files.
-js_files=$( echo "$staged_files" | grep -E '^src\/\S*\.js$' )
-lint_files "npm run lint:js:files" "$js_files"
-
-# Lint package.json.
-if ! npm run lint:pkg-json; then
-	exit 1
+# Lint staged PHP files
+php_files=$( git diff --diff-filter=d --staged --name-only | grep -E '/*\.php$' )
+if [ ! -z "$php_files" ]; then
+    npm run lint:php $php_files
+    if [ $? != 0 ]; then
+        exit 1
+    fi
 fi
+
+# Lint staged JS files
+js_files=$( git diff --diff-filter=d --staged --name-only | grep -E '^js\/\S*\.js$' )
+if [ ! -z "$js_files" ]; then
+    npm run lint:js:files $js_files
+    npm run test:js $js_files -- --findRelatedTests
+    if [ $? != 0 ]; then
+        exit 1
+    fi
+fi
+
+# Lint package.json
+npm run lint:pkg-json
