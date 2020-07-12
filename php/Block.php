@@ -2,15 +2,15 @@
 /**
  * Class Block
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 /**
  * Class Block
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 class Block {
 
@@ -19,7 +19,7 @@ class Block {
 	 *
 	 * @var string
 	 */
-	const BLOCK_NAME = 'easy-survey/survey';
+	const BLOCK_NAME = 'machine-learning/survey';
 
 	/**
 	 * The plugin.
@@ -94,7 +94,7 @@ class Block {
 
 		ob_start();
 		?>
-		<div class="easy-survey-block" data-block-instance="<?php echo esc_attr( self::$instance_id ); ?>"></div>
+		<div class="machine-learning-block" data-block-instance="<?php echo esc_attr( self::$instance_id ); ?>"></div>
 		<?php
 
 		return ob_get_clean();
@@ -109,11 +109,11 @@ class Block {
 	private function get_inline_script( $props ) {
 		ob_start();
 		?>
-		if ( 'undefined' === typeof easySurveyProps ) {
-			var easySurveyProps = {};
+		if ( 'undefined' === typeof machineLearningProps ) {
+			var machineLearningProps = {};
 		}
 
-		easySurveyProps[ <?php echo esc_js( self::$instance_id ); ?> ] = <?php echo wp_json_encode( $props ); ?>;
+		machineLearningProps[ <?php echo esc_js( self::$instance_id ); ?> ] = <?php echo wp_json_encode( $props ); ?>;
 		<?php
 		return ob_get_clean();
 	}

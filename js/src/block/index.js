@@ -13,15 +13,15 @@ import { BLOCK_NAME } from './constants';
 /**
  * Registers the AR Viewer block.
  */
-export default registerBlockType( BLOCK_NAME, {
-	title: __( 'Easy Survey', 'easy-survey' ),
+export default registerBlockType(BLOCK_NAME, {
+	title: __('Machine Learning', 'machine-learning'),
 	description: __(
 		'A simple survey, so you get quick feedback',
-		'easy-survey'
+		'machine-learning'
 	),
 	category: 'common',
 	icon: 'editor-table',
-	keywords: [ __( 'Survey', 'easy-survey' ) ],
+	keywords: [__('Survey', 'machine-learning')],
 	attributes: {
 		backgroundColor: {
 			type: 'string',
@@ -57,4 +57,4 @@ export default registerBlockType( BLOCK_NAME, {
 	save() {
 		return null;
 	},
-} );
+});

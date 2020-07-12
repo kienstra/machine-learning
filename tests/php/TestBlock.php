@@ -2,10 +2,10 @@
 /**
  * Tests for class Block.
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 use WP_Mock;
 use Mockery;
@@ -37,7 +37,7 @@ class TestBlock extends TestCase {
 	/**
 	 * Test __construct().
 	 *
-	 * @covers \EasySurvey\Block::__construct()
+	 * @covers \MachineLearning\Block::__construct()
 	 */
 	public function test_construct() {
 		$this->assertEquals( __NAMESPACE__ . '\\Plugin', get_class( $this->instance->plugin ) );
@@ -46,7 +46,7 @@ class TestBlock extends TestCase {
 	/**
 	 * Test init().
 	 *
-	 * @covers \EasySurvey\Block::init()
+	 * @covers \MachineLearning\Block::init()
 	 */
 	public function test_init() {
 		WP_Mock::expectActionAdded( 'init', [ $this->instance, 'register_block' ] );
@@ -56,7 +56,7 @@ class TestBlock extends TestCase {
 	/**
 	 * Test register_block.
 	 *
-	 * @covers \EasySurvey\Block::register_block()
+	 * @covers \MachineLearning\Block::register_block()
 	 */
 	public function test_register_block() {
 		WP_Mock::userFunction( 'register_block_type' )
@@ -69,7 +69,7 @@ class TestBlock extends TestCase {
 	/**
 	 * Test render_block.
 	 *
-	 * @covers \EasySurvey\Block::render_block()
+	 * @covers \MachineLearning\Block::render_block()
 	 */
 	public function test_render_block() {
 		WP_Mock::userFunction( 'wp_enqueue_script' )
@@ -81,6 +81,6 @@ class TestBlock extends TestCase {
 
 		$actual = $this->instance->render_block( [] );
 
-		$this->assertStringContainsString( '<div class="easy-survey-block" data-block-instance=', $actual );
+		$this->assertStringContainsString( '<div class="machine-learning-block" data-block-instance=', $actual );
 	}
 }

@@ -44,7 +44,7 @@ const OBSERVED_CONSOLE_MESSAGE_TYPES = {
 	error: 'error',
 };
 
-const PLUGIN = 'easy-survey';
+const PLUGIN = 'machine-learning';
 
 /**
  * Array of page event tuples of [ eventName, handler ].

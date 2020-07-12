@@ -2,17 +2,17 @@
 /**
  * Class Plugin
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 use stdClass;
 
 /**
  * Class Plugin
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 class Plugin {
 
@@ -28,14 +28,14 @@ class Plugin {
 	 *
 	 * @var string
 	 */
-	const SLUG = 'easy-survey';
+	const SLUG = 'machine-learning';
 
 	/**
 	 * The textdomain of the plugin.
 	 *
 	 * @var string
 	 */
-	const TEXTDOMAIN = 'easy-survey';
+	const TEXTDOMAIN = 'machine-learning';
 
 	/**
 	 * The file path of the plugin.

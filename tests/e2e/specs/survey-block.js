@@ -22,13 +22,13 @@ import {
 const { getByLabelText } = queries;
 
 test( 'survey block', async () => {
-	const blockName = 'Easy Survey';
+	const blockName = 'Machine Learning';
 
 	// Create a new post and add the AR Viewer block.
 	await createNewPost();
 	await insertBlockFromInserter( blockName );
 	await page.waitForSelector( '.wp-block' );
-	await compareToScreenshot( 'easy-survey/survey' );
+	await compareToScreenshot( 'machine-learning/survey' );
 
 	const document = await getDocument( page );
 	const surveyQuestion = 'What is your favorite color?';

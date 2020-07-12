@@ -37,5 +37,5 @@ git push origin "$built_tag"
 rm -rf built
 
 echo "Pushed tag $built_tag."
-echo "See https://github.com/kienstra/easy-survey/releases/tag/$built_tag"
-echo "For https://github.com/kienstra/easy-survey/releases/tag/$tag"
+echo "See https://github.com/kienstra/machine-learning/releases/tag/$built_tag"
+echo "For https://github.com/kienstra/machine-learning/releases/tag/$tag"

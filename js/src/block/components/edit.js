@@ -37,7 +37,7 @@ import { BLOCK_CLASS } from '../constants';
  * @param {BlockEditProps<EditAttributes>} props The component props.
  * @return {React.ReactElement} The Edit component of the block.
  */
-const Edit = ( {
+const Edit = ({
 	attributes: {
 		backgroundColor,
 		className,
@@ -47,67 +47,67 @@ const Edit = ( {
 		question,
 	},
 	setAttributes,
-} ) => {
+}) => {
 	const style = { backgroundColor, color: textColor };
 
 	return (
 		<>
 			<InspectorControls>
 				<PanelColorSettings
-					title={ __( 'Color settings', 'easy-survey' ) }
-					colorSettings={ [
+					title={__('Color settings', 'machine-learning')}
+					colorSettings={[
 						{
 							// @ts-ignore declaration is wrong.
 							value: textColor,
-							onChange: ( newValue ) =>
+							onChange: (newValue) =>
 								// @ts-ignore declaration is wrong.
-								setAttributes( { textColor: newValue } ),
-							label: __( 'Text color', 'easy-survey' ),
+								setAttributes({ textColor: newValue }),
+							label: __('Text color', 'machine-learning'),
 						},
 						{
 							// @ts-ignore declaration is wrong.
 							value: backgroundColor,
-							onChange: ( newValue ) =>
+							onChange: (newValue) =>
 								// @ts-ignore declaration is wrong.
-								setAttributes( { backgroundColor: newValue } ),
-							label: __( 'Background color', 'easy-survey' ),
+								setAttributes({ backgroundColor: newValue }),
+							label: __('Background color', 'machine-learning'),
 						},
-					] }
+					]}
 				>
 					<ContrastChecker
-						{ ...{
+						{...{
 							textColor,
 							backgroundColor,
-						} }
-						isLargeText={ false }
+						}}
+						isLargeText={false}
 					/>
 				</PanelColorSettings>
 			</InspectorControls>
-			<div className={ classnames( BLOCK_CLASS, className ) }>
+			<div className={classnames(BLOCK_CLASS, className)}>
 				<RichText
-					placeholder={ __( 'Survey question', 'easy-survey' ) }
-					value={ question }
-					onChange={ ( newValue ) =>
-						setAttributes( { question: newValue } )
+					placeholder={__('Survey question', 'machine-learning')}
+					value={question}
+					onChange={(newValue) =>
+						setAttributes({ question: newValue })
 					}
 				/>
 				<RichText
-					placeholder={ __( 'First option', 'easy-survey' ) }
-					value={ option1 }
-					onChange={ ( newValue ) =>
-						setAttributes( { option1: newValue } )
+					placeholder={__('First option', 'machine-learning')}
+					value={option1}
+					onChange={(newValue) =>
+						setAttributes({ option1: newValue })
 					}
 					className="wp-block-button__link"
-					style={ style }
+					style={style}
 				/>
 				<RichText
-					placeholder={ __( 'Second option', 'easy-survey' ) }
-					value={ option2 }
-					onChange={ ( newValue ) =>
-						setAttributes( { option2: newValue } )
+					placeholder={__('Second option', 'machine-learning')}
+					value={option2}
+					onChange={(newValue) =>
+						setAttributes({ option2: newValue })
 					}
 					className="wp-block-button__link"
-					style={ style }
+					style={style}
 				/>
 			</div>
 		</>

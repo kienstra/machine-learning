@@ -1,5 +1,5 @@
 {
-  "name": "easy-survey",
+  "name": "machine-learning",
   "version": "0.1.0",
   "description": "Adds a simple survey block.",
   "author": "Ryan Kienstra",
@@ -9,13 +9,13 @@
     "plugin",
     "survey"
   ],
-  "homepage": "https://github.com/kienstra/easy-survey#readme",
+  "homepage": "https://github.com/kienstra/machine-learning#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/kienstra/easy-survey.git"
+    "url": "git+ssh://git@github.com/kienstra/machine-learning.git"
   },
   "bugs": {
-    "url": "https://github.com/kienstra/easy-survey/issues"
+    "url": "https://github.com/kienstra/machine-learning/issues"
   },
   "directories": {
     "test": "tests"
@@ -26,17 +26,17 @@
     "@testing-library/react": "10.4.3",
     "@types/react": "16.9.41",
     "@types/wordpress__block-editor": "2.2.8",
-    "@wordpress/components": "9.9.0",
+    "@wordpress/components": "10.0.0",
     "@wordpress/dom-ready": "2.10.0",
-    "@wordpress/e2e-test-utils": "4.10.0",
-    "@wordpress/editor": "9.19.0",
-    "@wordpress/element": "2.15.0",
+    "@wordpress/e2e-test-utils": "4.11.0",
+    "@wordpress/editor": "9.20.0",
+    "@wordpress/element": "2.16.0",
     "@wordpress/env": "1.6.0",
     "@wordpress/eslint-plugin": "7.1.0",
     "@wordpress/i18n": "3.14.0",
     "@wordpress/jest-puppeteer-axe": "1.9.0",
-    "@wordpress/rich-text": "3.19.0",
-    "@wordpress/scripts": "11.0.0",
+    "@wordpress/rich-text": "3.20.0",
+    "@wordpress/scripts": "12.1.0",
     "classnames": "2.2.6",
     "eslint": "7.3.1",
     "eslint-plugin-eslint-comments": "3.2.0",

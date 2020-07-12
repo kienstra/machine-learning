@@ -37,7 +37,7 @@ module.exports = function( grunt ) {
 				command: 'cross-env BABEL_ENV=production webpack'
 			},
 			create_build_zip: {
-				command: 'if [ ! -e build ]; then echo "Run grunt build first."; exit 1; fi; if [ -e easy-survey.zip ]; then rm easy-survey.zip; fi; cd build; zip -r ../easy-survey.zip .; cd ..; echo; echo "ZIP of build: $(pwd)/easy-survey.zip"'
+				command: 'if [ ! -e build ]; then echo "Run grunt build first."; exit 1; fi; if [ -e machine-learning.zip ]; then rm machine-learning.zip; fi; cd build; zip -r ../machine-learning.zip .; cd ..; echo; echo "ZIP of build: $(pwd)/machine-learning.zip"'
 			}
 		},
 

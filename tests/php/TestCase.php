@@ -2,10 +2,10 @@
 /**
  * Test Case class.
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 use Mockery;
 use WP_Mock;

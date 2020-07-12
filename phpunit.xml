@@ -8,7 +8,7 @@
 	convertWarningsToExceptions="true"
 	>
 	<testsuites>
-		<testsuite name="easy-survey">
+		<testsuite name="machine-learning">
 			<directory prefix="Test" suffix=".php">./tests/</directory>
 			<exclude>./tests/php/TestCase.php</exclude>
 		</testsuite>
