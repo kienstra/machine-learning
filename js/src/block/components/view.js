@@ -31,24 +31,24 @@ import { BLOCK_CLASS } from '../constants';
  * @param {string} props.option2 The second option.
  * @param {string} props.question The survey question.
  */
-const View = ({ className, option1, option2, question }) => {
-	const [isSubmitted, setIsSubmitted] = useState(false);
+const View = ( { className, option1, option2, question } ) => {
+	const [ isSubmitted, setIsSubmitted ] = useState( false );
 
 	return (
-		<div className={`${BLOCK_CLASS} ${className}`}>
-			{isSubmitted ? (
-				<p>{__('Thanks for doing the survey!', 'machine-learning')}</p>
+		<div className={ `${ BLOCK_CLASS } ${ className }` }>
+			{ isSubmitted ? (
+				<p>{ __( 'Thanks for doing the survey!', 'machine-learning' ) }</p>
 			) : (
 				<>
-					<p>{question}</p>
-					<button onClick={() => setIsSubmitted(true)}>
-						{option1}
+					<p>{ question }</p>
+					<button onClick={ () => setIsSubmitted( true ) }>
+						{ option1 }
 					</button>
-					<button onClick={() => setIsSubmitted(true)}>
-						{option2}
+					<button onClick={ () => setIsSubmitted( true ) }>
+						{ option2 }
 					</button>
 				</>
-			)}
+			) }
 		</div>
 	);
 };
