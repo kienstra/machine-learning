@@ -7,6 +7,7 @@
 
 namespace MachineLearning;
 
+use stdClass;
 use WP_Mock;
 use Mockery;
 
@@ -72,6 +73,13 @@ class TestBlock extends TestCase {
 	 * @covers \MachineLearning\Block::render_block()
 	 */
 	public function test_render_block() {
+		$post_id  = 426;
+		$post     = new stdClass();
+		$post->ID = $post_id;
+		WP_Mock::userFunction( 'get_post' )
+			->once()
+			->andReturn( $post );
+
 		WP_Mock::userFunction( 'wp_enqueue_script' )
 			->once();
 		WP_Mock::userFunction( 'wp_json_encode' )
@@ -81,6 +89,9 @@ class TestBlock extends TestCase {
 
 		$actual = $this->instance->render_block( [] );
 
-		$this->assertStringContainsString( '<div class="machine-learning-block" data-block-instance=', $actual );
+		$this->assertStringContainsString(
+			'<div class="machine-learning-block" data-block-instance=',
+			$actual
+		);
 	}
 }

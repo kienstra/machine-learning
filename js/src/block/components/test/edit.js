@@ -7,33 +7,29 @@ import { render } from '@testing-library/react';
 /**
  * Internal dependencies
  */
-import Edit from '../edit';
+import { Edit } from '../';
 
-/**
- * Sets up the test by rendering the component.
- *
- * @param {Object} props The props to pass to the component.
- */
-const setup = ( props ) => {
-	render( <Edit { ...props } /> );
-};
+// Mocks the <InspectorControls> component only, so that the other components in this package behave as usual.
+jest.mock( '@wordpress/block-editor', () => {
+	const original = require.requireActual( '@wordpress/block-editor' );
+	return {
+		...original,
+		InspectorControls: ( { children } ) => children,
+	};
+} );
 
-const className = 'baz-class';
-const getComponent = () => document.querySelector( `.${ className }` );
+test( 'question block', async () => {
+	window.fetch = () => new Promise( ( resolve ) => resolve( [] ) );
 
-const hasText = ( textToSearch, text ) => -1 !== textToSearch.indexOf( text );
+	const props = {
+		attributes: {
+			category: 'FAQ',
+			className: 'example-class',
+			textSource: 'category',
+		},
+		setAttributes: jest.fn(),
+	};
 
-describe( 'Edit', () => {
-	it.each( [
-		[ 'What is your favorite pet?', 'Dogs', 'Cats' ],
-		[ 'What is your average sale?', '100', '10000' ],
-	] )( 'displays the survey options', ( question, option1, option2 ) => {
-		setup( { attributes: { className, option1, option2, question } } );
-
-		[ question, option1, option2 ].forEach( ( attribute ) => {
-			expect(
-				hasText( getComponent().textContent, attribute )
-			).toStrictEqual( true );
-		} );
-	} );
+	const { getByLabelText } = render( <Edit { ...props } /> );
+	expect( getByLabelText( 'Analyze text from' ) ).toBeInTheDocument();
 } );

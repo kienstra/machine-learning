@@ -10,7 +10,7 @@ namespace MachineLearning;
 /*
 Plugin Name: Machine Learning
 Plugin URI: https://github.com/kienstra/machine-learning
-Description: Get a block that answers your questions.
+Description: A block that answers your questions.
 Version: 0.1.0
 Author: Ryan Kienstra
 Author URI: https://ryankienstra.com

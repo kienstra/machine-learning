@@ -19,7 +19,7 @@ class Block {
 	 *
 	 * @var string
 	 */
-	const BLOCK_NAME = 'machine-learning/survey';
+	const BLOCK_NAME = 'machine-learning/question';
 
 	/**
 	 * The plugin.
@@ -60,13 +60,13 @@ class Block {
 				self::BLOCK_NAME,
 				[
 					'attributes'      => [
-						'question' => [
+						'category'   => [
 							'type' => 'string',
 						],
-						'option1'  => [
+						'className'  => [
 							'type' => 'string',
 						],
-						'option2'  => [
+						'textSource' => [
 							'type' => 'string',
 						],
 					],
@@ -80,10 +80,12 @@ class Block {
 	 * Gets the markup of the dynamic 'AR Viewer' block, including its scripts.
 	 *
 	 * @param array $attributes The block attributes.
-	 * @return string|null $markup The markup of the block.
+	 * @return string The markup of the block.
 	 */
 	public function render_block( $attributes ) {
 		self::$instance_id++;
+		$post                 = get_post();
+		$attributes['postId'] = $post->ID;
 
 		$this->plugin->components->Asset->enqueue_script( Asset::FRONT_END_SCRIPT_SLUG );
 		wp_add_inline_script(
@@ -110,7 +112,7 @@ class Block {
 		ob_start();
 		?>
 		if ( 'undefined' === typeof machineLearningProps ) {
-			var machineLearningProps = {};
+			const machineLearningProps = {};
 		}
 
 		machineLearningProps[ <?php echo esc_js( self::$instance_id ); ?> ] = <?php echo wp_json_encode( $props ); ?>;

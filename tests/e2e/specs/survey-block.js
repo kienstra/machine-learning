@@ -8,7 +8,7 @@ import { getDocument, queries } from 'pptr-testing-library';
  */
 import {
 	createNewPost,
-	saveDraft
+	saveDraft,
 } from '@wordpress/e2e-test-utils';
 
 /**
@@ -19,35 +19,20 @@ import {
 	insertBlockFromInserter,
 } from '../helpers';
 
-const { getByLabelText } = queries;
+const { getByLabelText, getByText } = queries;
 
-test( 'survey block', async () => {
-	const blockName = 'Machine Learning';
+test( 'question block', async () => {
+	const blockName = 'Machine Learning Question';
 
 	// Create a new post and add the AR Viewer block.
 	await createNewPost();
 	await insertBlockFromInserter( blockName );
 	await page.waitForSelector( '.wp-block' );
-	await compareToScreenshot( 'machine-learning/survey' );
+	await compareToScreenshot( 'machine-learning/question' );
 
 	const document = await getDocument( page );
-	const surveyQuestion = 'What is your favorite color?';
-	await ( await getByLabelText( document, /survey question/i ) ).focus();
-	await page.keyboard.type( surveyQuestion );
-
-	// The block should have the text 'model' in it.
-	const firstOption = 'Green is good';
-	const secondOption = 'Red is better';
-	await ( await getByLabelText( document, /first option/i ) ).focus();
-	await page.keyboard.type( firstOption );
-	await ( await getByLabelText( document, /second option/i ) ).focus();
-	await page.keyboard.type( secondOption );
-
+	getByText( document, /ask a question/i );
+	expect( getByText( document, /get the answer/i ) ).toBeInTheDocument();
 	await saveDraft();
 	await page.reload();
-
-	// The entered values should still be present after a page reload.
-	await expect( page ).toMatch( surveyQuestion );
-	await expect( page ).toMatch( firstOption );
-	await expect( page ).toMatch( secondOption );
 } );

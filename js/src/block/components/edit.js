@@ -1,20 +1,18 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
 import * as React from 'react';
+import classNames from 'classnames';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import {
-	ContrastChecker,
-	PanelColorSettings,
-	InspectorControls,
-	RichText,
-} from '@wordpress/block-editor';
+import apiFetch from '@wordpress/api-fetch';
 import { BlockEditProps } from '@wordpress/blocks';
+import { Button, PanelBody, SelectControl } from '@wordpress/components';
+import { InspectorControls } from '@wordpress/block-editor';
+import { useEffect, useState } from '@wordpress/element';
+import { __ } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -23,12 +21,9 @@ import { BLOCK_CLASS } from '../constants';
 
 /**
  * @typedef {Object} EditAttributes The block attributes.
- * @property {string} backgroundColor The background color.
+ * @property {string} category The category to get the text from.
  * @property {string} className The name of the class.
- * @property {string} option1 The first option.
- * @property {string} option2 The second option.
- * @property {string} textColor The text color.
- * @property {string} question The question.
+ * @property {string} textSource The source of the text.
  */
 
 /**
@@ -39,76 +34,72 @@ import { BLOCK_CLASS } from '../constants';
  */
 const Edit = ( {
 	attributes: {
-		backgroundColor,
+		category,
 		className,
-		option1,
-		option2,
-		textColor,
-		question,
+		textSource,
 	},
 	setAttributes,
 } ) => {
-	const style = { backgroundColor, color: textColor };
+	const categoryTextSource = 'category';
+	const [ categories, setCategories ] = useState( [] );
+
+	useEffect( () => {
+		let isMounted = true;
+
+		apiFetch( {
+			path: '/wp/v2/categories',
+		} ).then( ( fetchedData ) => {
+			if ( isMounted && Array.isArray( fetchedData ) ) {
+				setCategories(
+					fetchedData.map( ( singleCategory ) => {
+						return { label: singleCategory.name, value: singleCategory.id };
+					} )
+				);
+			}
+		} );
+
+		return function cleanUp() {
+			isMounted = false;
+		};
+	} );
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelColorSettings
-					title={ __( 'Color settings', 'machine-learning' ) }
-					colorSettings={ [
-						{
-							// @ts-ignore declaration is wrong.
-							value: textColor,
-							onChange: ( newValue ) =>
-							// @ts-ignore declaration is wrong.
-								setAttributes( { textColor: newValue } ),
-							label: __( 'Text color', 'machine-learning' ),
-						},
-						{
-							// @ts-ignore declaration is wrong.
-							value: backgroundColor,
-							onChange: ( newValue ) =>
-								// @ts-ignore declaration is wrong.
-								setAttributes( { backgroundColor: newValue } ),
-							label: __( 'Background color', 'machine-learning' ),
-						},
-					] }
-				>
-					<ContrastChecker
-						{ ...{
-							textColor,
-							backgroundColor,
+				<PanelBody>
+					<SelectControl
+						label={ __( 'Analyze text from', 'machine-learning' ) }
+						value={ textSource }
+						options={ [
+							{
+								label: __( 'This post', 'machine-learning' ),
+								value: 'post',
+							},
+							{
+								label: __( 'A category', 'machine-learning' ),
+								value: categoryTextSource,
+							},
+						] }
+						onChange={ ( newSource ) => {
+							setAttributes( { textSource: newSource } );
 						} }
-						isLargeText={ false }
 					/>
-				</PanelColorSettings>
+					{ categoryTextSource === textSource && <SelectControl
+						label={ __( 'Category', 'machine-learning' ) }
+						value={ category }
+						options={ categories }
+						onChange={ ( newCat ) => {
+							setAttributes( { category: newCat } );
+						} }
+					/> }
+				</PanelBody>
 			</InspectorControls>
-			<div className={ classnames( BLOCK_CLASS, className ) }>
-				<RichText
-					placeholder={ __( 'Survey question', 'machine-learning' ) }
-					value={ question }
-					onChange={ ( newValue ) =>
-						setAttributes( { question: newValue } )
-					}
-				/>
-				<RichText
-					placeholder={ __( 'First option', 'machine-learning' ) }
-					value={ option1 }
-					onChange={ ( newValue ) =>
-						setAttributes( { option1: newValue } )
-					}
-					className="wp-block-button__link"
-					style={ style }
-				/>
-				<RichText
-					placeholder={ __( 'Second option', 'machine-learning' ) }
-					value={ option2 }
-					onChange={ ( newValue ) =>
-						setAttributes( { option2: newValue } )
-					}
-					className="wp-block-button__link"
-					style={ style }
-				/>
+			<div className={ classNames( BLOCK_CLASS, className ) }>
+				<h4>{ __( 'Ask a question', 'machine-learning' ) }</h4>
+				<div><input type="text" /></div>
+				<Button>
+					{ __( 'Get the answer', 'machine-learning' ) }
+				</Button>
 			</div>
 		</>
 	);
