@@ -2,10 +2,10 @@
 /**
  * Tests for class Asset.
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 use WP_Mock;
 
@@ -38,7 +38,7 @@ class TestAsset extends TestCase {
 	/**
 	 * Test __construct.
 	 *
-	 * @covers \EasySurvey\Plugin::__construct()
+	 * @covers \MachineLearning\Plugin::__construct()
 	 */
 	public function test_construct() {
 		$this->assertEquals( __NAMESPACE__ . '\\Plugin', get_class( $this->instance->plugin ) );
@@ -47,7 +47,7 @@ class TestAsset extends TestCase {
 	/**
 	 * Test init.
 	 *
-	 * @covers \EasySurvey\Plugin::init()
+	 * @covers \MachineLearning\Plugin::init()
 	 */
 	public function test_init() {
 		WP_Mock::expectActionAdded( 'enqueue_block_editor_assets', [ $this->instance, 'enqueue_block_editor_scripts' ] );
@@ -57,16 +57,16 @@ class TestAsset extends TestCase {
 	/**
 	 * Test enqueue_block_editor_scripts.
 	 *
-	 * @covers \EasySurvey\Plugin::enqueue_block_editor_scripts()
+	 * @covers \MachineLearning\Plugin::enqueue_block_editor_scripts()
 	 */
 	public function test_enqueue_block_editor_scripts() {
 		WP_Mock::userFunction( 'wp_enqueue_script' )
 			->once()
-			->withSomeOfArgs( 'easy-survey-block' );
+			->withSomeOfArgs( 'machine-learning-block' );
 
 		WP_Mock::userFunction( 'wp_enqueue_script' )
 			->once()
-			->withSomeOfArgs( 'easy-survey-front-end' );
+			->withSomeOfArgs( 'machine-learning-front-end' );
 
 		$this->instance->enqueue_block_editor_scripts();
 
@@ -75,13 +75,13 @@ class TestAsset extends TestCase {
 	/**
 	 * Test enqueue_script.
 	 *
-	 * @covers \EasySurvey\Plugin::enqueue_script()
+	 * @covers \MachineLearning\Plugin::enqueue_script()
 	 */
 	public function test_enqueue_script() {
 		$slug = 'baz';
 		WP_Mock::userFunction( 'wp_enqueue_script' )
 			->once()
-			->withSomeOfArgs( "easy-survey-{$slug}" );
+			->withSomeOfArgs( "machine-learning-{$slug}" );
 
 		$this->instance->enqueue_script( $slug );
 	}

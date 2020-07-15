@@ -1,11 +1,11 @@
 /* eslint-env node */
 /* jshint node:true */
-/* eslint-disable camelcase, no-console, no-param-reassign */
 
 /**
  * Mainly copied from the AMP Plugin for WordPress.
  *
  * @see https://github.com/ampproject/amp-wp
+ * @param {Object} grunt The grunt object.
  */
 module.exports = function( grunt ) {
 	'use strict';
@@ -17,28 +17,28 @@ module.exports = function( grunt ) {
 		// Clean up the build.
 		clean: {
 			build: {
-				src: [ 'build' ]
-			}
+				src: [ 'build' ],
+			},
 		},
 
 		// Shell actions.
 		shell: {
 			options: {
 				stdout: true,
-				stderr: true
+				stderr: true,
 			},
 			readme: {
-				command: './vendor/xwp/wp-dev-lib/scripts/generate-markdown-readme' // Generate the readme.md.
+				command: './vendor/xwp/wp-dev-lib/scripts/generate-markdown-readme', // Generate the readme.md.
 			},
 			phpunit: {
-				command: 'phpunit'
+				command: 'phpunit',
 			},
 			webpack_production: {
-				command: 'cross-env BABEL_ENV=production webpack'
+				command: 'cross-env BABEL_ENV=production webpack',
 			},
 			create_build_zip: {
-				command: 'if [ ! -e build ]; then echo "Run grunt build first."; exit 1; fi; if [ -e easy-survey.zip ]; then rm easy-survey.zip; fi; cd build; zip -r ../easy-survey.zip .; cd ..; echo; echo "ZIP of build: $(pwd)/easy-survey.zip"'
-			}
+				command: 'if [ ! -e build ]; then echo "Run grunt build first."; exit 1; fi; if [ -e machine-learning.zip ]; then rm machine-learning.zip; fi; cd build; zip -r ../machine-learning.zip .; cd ..; echo; echo "ZIP of build: $(pwd)/machine-learning.zip"',
+			},
 		},
 
 	} );
@@ -51,39 +51,37 @@ module.exports = function( grunt ) {
 
 	// Register tasks.
 	grunt.registerTask( 'default', [
-		'build'
+		'build',
 	] );
 
 	grunt.registerTask( 'readme', [
-		'shell:readme'
+		'shell:readme',
 	] );
 
 	grunt.registerTask( 'build', function() {
-		var done, spawnQueue, stdout;
-		done = this.async();
-		spawnQueue = [];
-		stdout = [];
+		const done = this.async();
+		const spawnQueue = [];
+		const stdout = [];
 
 		grunt.task.run( 'shell:webpack_production' );
 
 		spawnQueue.push(
 			{
 				cmd: 'git',
-				args: [ '--no-pager', 'log', '-1', '--format=%h', '--date=short' ]
+				args: [ '--no-pager', 'log', '-1', '--format=%h', '--date=short' ],
 			},
 			{
 				cmd: 'git',
-				args: [ 'ls-files' ]
+				args: [ 'ls-files' ],
 			}
 		);
 
 		function finalize() {
-			var commitHash, lsOutput, versionAppend, paths;
-			commitHash = stdout.shift();
-			lsOutput = stdout.shift();
-			versionAppend = new Date().toISOString().replace( /\.\d+/, '' ).replace( /-|:/g, '' ) + '-' + commitHash;
+			const commitHash = stdout.shift();
+			const lsOutput = stdout.shift();
+			const versionAppend = new Date().toISOString().replace( /\.\d+/, '' ).replace( /-|:/g, '' ) + '-' + commitHash;
 
-			paths = lsOutput.trim().split( /\n/ ).filter( function( file ) {
+			const paths = lsOutput.trim().split( /\n/ ).filter( function( file ) {
 				return ! /^(blocks|\.|bin|([^/]+)+\.(md|json|xml)|Gruntfile\.js|tests|wp-assets|dev-lib|readme\.md|composer\..*|webpack.*|languages\/README.*)/.test( file );
 			} );
 			paths.push( 'vendor/autoload.php' );
@@ -99,24 +97,24 @@ module.exports = function( grunt ) {
 					expand: true,
 					options: {
 						noProcess: [ '*/**', 'LICENSE' ], // That is, only process amp.php and readme.txt.
-						process: function( content, srcpath ) {
-							var matches, version, versionRegex;
+						process( content, srcpath ) {
 							if ( /amp\.php$/.test( srcpath ) ) {
-								versionRegex = /(\*\s+Version:\s+)(\d+(\.\d+)+-\w+)/;
+								const versionRegex = /(\*\s+Version:\s+)(\d+(\.\d+)+-\w+)/;
 
 								// If not a stable build (e.g. 0.7.0-beta), amend the version with the git commit and current timestamp.
-								matches = content.match( versionRegex );
+								const matches = content.match( versionRegex );
 								if ( matches ) {
-									version = matches[ 2 ] + '-' + versionAppend;
+									const version = matches[ 2 ] + '-' + versionAppend;
+									// eslint-disable-next-line no-console
 									console.log( 'Updating version in amp.php to ' + version );
 									content = content.replace( versionRegex, '$1' + version );
 									content = content.replace( /(define\(\s*'AMP__VERSION',\s*')(.+?)(?=')/, '$1' + version );
 								}
 							}
 							return content;
-						}
-					}
-				}
+						},
+					},
+				},
 			} );
 			grunt.task.run( 'readme' );
 			grunt.task.run( 'copy' );
@@ -125,7 +123,7 @@ module.exports = function( grunt ) {
 		}
 
 		function doNext() {
-			var nextSpawnArgs = spawnQueue.shift();
+			const nextSpawnArgs = spawnQueue.shift();
 			if ( ! nextSpawnArgs ) {
 				finalize();
 			} else {
@@ -146,7 +144,7 @@ module.exports = function( grunt ) {
 	} );
 
 	grunt.registerTask( 'create-build-zip', [
-		'shell:create_build_zip'
+		'shell:create_build_zip',
 	] );
 
 	grunt.registerTask( 'deploy', [

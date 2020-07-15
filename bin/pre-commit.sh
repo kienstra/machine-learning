@@ -4,6 +4,7 @@
 php_files=$( git diff --diff-filter=d --staged --name-only | grep -E '/*\.php$' )
 if [ ! -z "$php_files" ]; then
     npm run lint:php $php_files
+    npm run test:php
     if [ $? != 0 ]; then
         exit 1
     fi

@@ -7,38 +7,29 @@ import { registerBlockType } from '@wordpress/blocks';
 /**
  * Internal dependencies
  */
-import Edit from './components/edit';
+import { Edit } from './components';
 import { BLOCK_NAME } from './constants';
 
 /**
- * Registers the AR Viewer block.
+ * Registers the Question block.
  */
 export default registerBlockType( BLOCK_NAME, {
-	title: __( 'Easy Survey', 'easy-survey' ),
+	title: __( 'Machine Learning Question', 'machine-learning' ),
 	description: __(
-		'A simple survey, so you get quick feedback',
-		'easy-survey'
+		'Ask a question, and get an automatic response',
+		'machine-learning'
 	),
 	category: 'common',
 	icon: 'editor-table',
-	keywords: [ __( 'Survey', 'easy-survey' ) ],
+	keywords: [ __( 'Machine Learning', 'machine-learning' ) ],
 	attributes: {
-		backgroundColor: {
+		category: {
 			type: 'string',
 		},
 		className: {
-			type: 'boolean',
-		},
-		option1: {
 			type: 'string',
 		},
-		option2: {
-			type: 'string',
-		},
-		textColor: {
-			type: 'string',
-		},
-		question: {
+		textSource: {
 			type: 'string',
 		},
 	},

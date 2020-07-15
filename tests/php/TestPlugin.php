@@ -2,10 +2,10 @@
 /**
  * Tests for class Plugin.
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 use WP_Mock;
 
@@ -34,7 +34,7 @@ class TestPlugin extends TestCase {
 	/**
 	 * Test init().
 	 *
-	 * @covers \EasySurvey\Plugin::init()
+	 * @covers \MachineLearning\Plugin::init()
 	 */
 	public function test_init() {
 		WP_Mock::expectActionAdded( 'init', [ $this->instance, 'plugin_localization' ] );
@@ -45,7 +45,7 @@ class TestPlugin extends TestCase {
 	/**
 	 * Test init_classes.
 	 *
-	 * @covers \EasySurvey\Plugin::init_classes()
+	 * @covers \MachineLearning\Plugin::init_classes()
 	 */
 	public function test_init_classes() {
 		$this->instance->init_classes();
@@ -62,7 +62,7 @@ class TestPlugin extends TestCase {
 	public function test_plugin_localization() {
 		WP_Mock::userFunction( 'load_plugin_textdomain' )
 			->once()
-			->withSomeOfArgs( 'easy-survey' );
+			->withSomeOfArgs( 'machine-learning' );
 
 		$this->instance->plugin_localization();
 	}
@@ -70,7 +70,7 @@ class TestPlugin extends TestCase {
 	/**
 	 * Test get_path.
 	 *
-	 * @covers \EasySurvey\Plugin::get_path()
+	 * @covers \MachineLearning\Plugin::get_path()
 	 */
 	public function test_get_path() {
 		$this->assertIsString( $this->instance->get_path() );
@@ -79,7 +79,7 @@ class TestPlugin extends TestCase {
 	/**
 	 * Test get_dir.
 	 *
-	 * @covers \EasySurvey\Plugin::get_dir()
+	 * @covers \MachineLearning\Plugin::get_dir()
 	 */
 	public function test_get_dir() {
 		$this->assertIsString( $this->instance->get_dir() );
@@ -89,7 +89,7 @@ class TestPlugin extends TestCase {
 	/**
 	 * Test get_script_path.
 	 *
-	 * @covers \EasySurvey\Plugin::get_script_path()
+	 * @covers \MachineLearning\Plugin::get_script_path()
 	 */
 	public function test_get_script_path() {
 		WP_Mock::userFunction( 'plugins_url' )

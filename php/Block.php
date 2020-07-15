@@ -2,15 +2,15 @@
 /**
  * Class Block
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 /**
  * Class Block
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 class Block {
 
@@ -19,7 +19,7 @@ class Block {
 	 *
 	 * @var string
 	 */
-	const BLOCK_NAME = 'easy-survey/survey';
+	const BLOCK_NAME = 'machine-learning/question';
 
 	/**
 	 * The plugin.
@@ -60,13 +60,13 @@ class Block {
 				self::BLOCK_NAME,
 				[
 					'attributes'      => [
-						'question' => [
+						'category'   => [
 							'type' => 'string',
 						],
-						'option1'  => [
+						'className'  => [
 							'type' => 'string',
 						],
-						'option2'  => [
+						'textSource' => [
 							'type' => 'string',
 						],
 					],
@@ -80,10 +80,12 @@ class Block {
 	 * Gets the markup of the dynamic 'AR Viewer' block, including its scripts.
 	 *
 	 * @param array $attributes The block attributes.
-	 * @return string|null $markup The markup of the block.
+	 * @return string The markup of the block.
 	 */
 	public function render_block( $attributes ) {
 		self::$instance_id++;
+		$post                 = get_post();
+		$attributes['postId'] = $post->ID;
 
 		$this->plugin->components->Asset->enqueue_script( Asset::FRONT_END_SCRIPT_SLUG );
 		wp_add_inline_script(
@@ -94,7 +96,7 @@ class Block {
 
 		ob_start();
 		?>
-		<div class="easy-survey-block" data-block-instance="<?php echo esc_attr( self::$instance_id ); ?>"></div>
+		<div class="machine-learning-block" data-block-instance="<?php echo esc_attr( self::$instance_id ); ?>"></div>
 		<?php
 
 		return ob_get_clean();
@@ -109,11 +111,11 @@ class Block {
 	private function get_inline_script( $props ) {
 		ob_start();
 		?>
-		if ( 'undefined' === typeof easySurveyProps ) {
-			var easySurveyProps = {};
+		if ( 'undefined' === typeof machineLearningProps ) {
+			const machineLearningProps = {};
 		}
 
-		easySurveyProps[ <?php echo esc_js( self::$instance_id ); ?> ] = <?php echo wp_json_encode( $props ); ?>;
+		machineLearningProps[ <?php echo esc_js( self::$instance_id ); ?> ] = <?php echo wp_json_encode( $props ); ?>;
 		<?php
 		return ob_get_clean();
 	}

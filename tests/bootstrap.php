@@ -2,7 +2,7 @@
 /**
  * Test bootstrap file.
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
 require_once 'vendor/autoload.php';

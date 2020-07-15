@@ -5,10 +5,10 @@
 Please `cd` to `wp-content/plugins/` and clone this repo:
 
 ```bash
-git clone git@github.com:kienstra/easy-survey
+git clone git@github.com:kienstra/machine-learning
 ```
 
-Then, `cd` to the `easy-survey/` directory and run `composer install` and `npm install`. This will install dependencies, including [wp-dev-lib](https://github.com/xwp/wp-dev-lib/). It will also install a [pre-commit hook](https://github.com/xwp/wp-dev-lib/blob/95d9ba72a90b3d3dbc02b1e48f4d8212467f7edc/scripts/pre-commit).
+Then, `cd` to the `machine-learning/` directory and run `composer install` and `npm install`. This will install dependencies, including [wp-dev-lib](https://github.com/xwp/wp-dev-lib/). It will also install a [pre-commit hook](https://github.com/xwp/wp-dev-lib/blob/95d9ba72a90b3d3dbc02b1e48f4d8212467f7edc/scripts/pre-commit).
 
 If you add a new class while developing, add the class name to `Plugin::$classes` so that it's instantiated:
 
@@ -41,4 +41,4 @@ $ phpunit --coverage-html /tmp/report
 If you've already run `npm install`, execute `npm run dev`. This will compile the block JavaScript file.
 
 ## Creating A Build
-Assuming you've run `composer install` and `npm install` from the development setup, do `npm run build`. This will create an `easy-survey.zip` file, and a `build/` directory. It will also compile the block JavaScript file.
+Assuming you've run `composer install` and `npm install` from the development setup, do `npm run build`. This will create an `machine-learning.zip` file, and a `build/` directory. It will also compile the block JavaScript file.

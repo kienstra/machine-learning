@@ -1,2 +1,2 @@
-export const BLOCK_NAME = 'easy-survey/survey';
-export const BLOCK_CLASS = 'easy-survey-block';
+export const BLOCK_NAME = 'machine-learning/question';
+export const BLOCK_CLASS = 'machine-learning-block';

@@ -2,15 +2,15 @@
 /**
  * Class Asset
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 /**
  * Class Asset
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 class Asset {
 
@@ -81,7 +81,7 @@ class Asset {
 
 	/**
 	 * Gets the slug of the asset, prefixed with the plugin slug.
-	 * For example, 'easy-survey-block'.
+	 * For example, 'machine-learning-block'.
 	 *
 	 * @param string $asset_slug The slug of the asset.
 	 * @return string $full_slug The slug of the asset, prepended with the plugin slug.

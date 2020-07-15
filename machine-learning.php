@@ -2,15 +2,15 @@
 /**
  * Plugin bootstrap file.
  *
- * @package EasySurvey
+ * @package MachineLearning
  */
 
-namespace EasySurvey;
+namespace MachineLearning;
 
 /*
-Plugin Name: Easy Survey
-Plugin URI: https://github.com/kienstra/easy-survey
-Description: Create an easy survey, to get quick feedback.
+Plugin Name: Machine Learning
+Plugin URI: https://github.com/kienstra/machine-learning
+Description: A block that answers your questions.
 Version: 0.1.0
 Author: Ryan Kienstra
 Author URI: https://ryankienstra.com

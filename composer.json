@@ -1,5 +1,5 @@
 {
-	"name": "root/easy-survey",
+	"name": "root/machine-learning",
 	"description": "Adds blocks for augmented reality experiences.",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
@@ -23,10 +23,10 @@
 		"wp-coding-standards/wpcs": "2.2.1"
 	},
 	"autoload": {
-		"psr-4": {"EasySurvey\\": "php/"}
+		"psr-4": {"MachineLearning\\": "php/"}
 	},
 	"autoload-dev": {
-		"psr-4": {"EasySurvey\\": "tests/php/"}
+		"psr-4": {"MachineLearning\\": "tests/php/"}
 	},
 	"scripts": {
 		"test": [
