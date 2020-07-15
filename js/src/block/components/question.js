@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classNames from 'classnames';
+import memoize from 'memize';
 import * as React from 'react';
 import '@tensorflow/tfjs';
 import * as qna from '@tensorflow-models/qna';
@@ -10,7 +11,7 @@ import * as qna from '@tensorflow-models/qna';
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
-import { useRef, useState } from '@wordpress/element';
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { addQueryArgs } from '@wordpress/url';
 
@@ -34,7 +35,6 @@ import { BLOCK_CLASS } from '../constants';
  * @return {React.ReactElement} The question component.
  */
 const Question = ( { category, className, postId, textSource } ) => {
-	const cache = useRef( { text: '' } );
 	const [ question, setQuestion ] = useState( '' );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ answer, setAnswer ] = useState( '' );
@@ -44,11 +44,7 @@ const Question = ( { category, className, postId, textSource } ) => {
 	 *
 	 * @return {Promise<string>} The text to search for the answer to the question.
 	 */
-	const getTextToSearch = async () => {
-		if ( cache.current.text ) {
-			return cache.current.text;
-		}
-
+	const getTextToSearch = memoize( async () => {
 		if ( 'category' === textSource && !! category ) {
 			const result = await apiFetch( {
 				path: addQueryArgs(
@@ -61,15 +57,12 @@ const Question = ( { category, className, postId, textSource } ) => {
 				return '';
 			}
 
-			const text = result.reduce( ( accumulator, currentValue ) => {
+			return result.reduce( ( accumulator, currentValue ) => {
 				if ( currentValue.content && currentValue.content.rendered ) {
 					return accumulator + currentValue.content.rendered;
 				}
 				return accumulator;
 			}, '' );
-
-			cache.current.text = text;
-			return text;
 		}
 
 		const result = await apiFetch( {
@@ -77,10 +70,17 @@ const Question = ( { category, className, postId, textSource } ) => {
 		} );
 
 		// @ts-ignore
-		const text = result.content && result.content.rendered ? result.content.rendered : '';
-		cache.current.text = text;
-		return text;
-	};
+		return result.content && result.content.rendered ? result.content.rendered : '';
+	} );
+
+	/**
+	 * Gets the TensorFlow model.
+	 *
+	 * @return Promise<qna.QuestionAndAnswer> The question and answer model.
+	 */
+	const getModel = memoize( async () => {
+		return await qna.load();
+	} );
 
 	/**
 	 * Submits the question and sets the answer.
@@ -90,7 +90,7 @@ const Question = ( { category, className, postId, textSource } ) => {
 		const textToSearch = await getTextToSearch();
 
 		if ( textToSearch ) {
-			const model = await qna.load();
+			const model = await getModel();
 			const newAnswers = await model.findAnswers( question, textToSearch );
 			if ( newAnswers[ 0 ] && newAnswers[ 0 ].text ) {
 				setAnswer( newAnswers[ 0 ].text );

@@ -112,7 +112,7 @@ class Block {
 		ob_start();
 		?>
 		if ( 'undefined' === typeof machineLearningProps ) {
-			const machineLearningProps = {};
+			var machineLearningProps = {};
 		}
 
 		machineLearningProps[ <?php echo esc_js( self::$instance_id ); ?> ] = <?php echo wp_json_encode( $props ); ?>;
