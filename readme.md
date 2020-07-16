@@ -1,6 +1,6 @@
 # Machine Learning
 
-A survey block, rendered on the front-end by React.
+A question block, using [TensorFlow](https://www.tensorflow.org/) to find an answer to a question based on text on your site.
 
 **Contributors:** [ryankienstra](https://profiles.wordpress.org/ryankienstra)
 **Tags:** [blocks](https://wordpress.org/plugins/tags/blocks), [machine-learning](https://wordpress.org/plugins/tags/survey)
@@ -25,4 +25,4 @@ This is a demo of rendering a block with React on the front-end.
 ## Changelog ##
 
 ### 0.1.0 ###
-- Adds the block, with front-end rendering in React.
+- Adds the block, answering questions based on the content of a site.

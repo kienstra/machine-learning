@@ -85,7 +85,6 @@ class TestPlugin extends TestCase {
 		$this->assertIsString( $this->instance->get_dir() );
 	}
 
-
 	/**
 	 * Test get_script_path.
 	 *
@@ -97,6 +96,20 @@ class TestPlugin extends TestCase {
 			->andReturnArg( 0 );
 		$slug = 'example';
 
-		$this->assertStringContainsString( $slug, $this->instance->get_script_path( $slug ) );
+		$this->assertStringContainsString( "{$slug}.js", $this->instance->get_script_path( $slug ) );
+	}
+
+	/**
+	 * Test get_style_path.
+	 *
+	 * @covers \MachineLearning\Plugin::get_style_path()
+	 */
+	public function test_get_style_path() {
+		WP_Mock::userFunction( 'plugins_url' )
+			->once()
+			->andReturnArg( 0 );
+		$slug = 'foo-style';
+
+		$this->assertStringContainsString( "{$slug}.css", $this->instance->get_style_path( $slug ) );
 	}
 }

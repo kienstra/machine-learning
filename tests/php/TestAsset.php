@@ -64,10 +64,6 @@ class TestAsset extends TestCase {
 			->once()
 			->withSomeOfArgs( 'machine-learning-block' );
 
-		WP_Mock::userFunction( 'wp_enqueue_script' )
-			->once()
-			->withSomeOfArgs( 'machine-learning-front-end' );
-
 		$this->instance->enqueue_block_editor_scripts();
 
 	}
@@ -78,11 +74,25 @@ class TestAsset extends TestCase {
 	 * @covers \MachineLearning\Plugin::enqueue_script()
 	 */
 	public function test_enqueue_script() {
-		$slug = 'baz';
+		$slug = 'block';
 		WP_Mock::userFunction( 'wp_enqueue_script' )
 			->once()
 			->withSomeOfArgs( "machine-learning-{$slug}" );
 
 		$this->instance->enqueue_script( $slug );
+	}
+
+	/**
+	 * Test enqueue_style.
+	 *
+	 * @covers \MachineLearning\Plugin::enqueue_style()
+	 */
+	public function test_enqueue_style() {
+		$slug = 'example-style';
+		WP_Mock::userFunction( 'wp_enqueue_style' )
+			->once()
+			->withSomeOfArgs( "machine-learning-{$slug}" );
+
+		$this->instance->enqueue_style( $slug );
 	}
 }

@@ -123,12 +123,22 @@ class Plugin {
 	}
 
 	/**
-	 * Gets the path of a script, given its slug.
+	 * Gets the path of a script.
 	 *
 	 * @param string $slug The slug of the script.
 	 * @return string The path of the script.
 	 */
 	public function get_script_path( $slug ) {
 		return plugins_url( "js/dist/{$slug}.js", $this->plugin_path );
+	}
+
+	/**
+	 * Gets the path of a stylesheet.
+	 *
+	 * @param string $slug The slug of the stylesheet.
+	 * @return string The path of the stylesheet.
+	 */
+	public function get_style_path( $slug ) {
+		return plugins_url( "css/{$slug}.css", $this->plugin_path );
 	}
 }
