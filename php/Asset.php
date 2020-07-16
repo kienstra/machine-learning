@@ -65,9 +65,7 @@ class Asset {
 	 * in the 'render_callback' of the block.
 	 */
 	public function enqueue_block_editor_scripts() {
-		foreach ( [ self::BLOCK_JS_SLUG, self::FRONT_END_SCRIPT_SLUG ] as $slug ) {
-			$this->enqueue_script( $slug );
-		}
+		$this->enqueue_script( self::BLOCK_JS_SLUG );
 	}
 
 	/**

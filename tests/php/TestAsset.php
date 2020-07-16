@@ -64,10 +64,6 @@ class TestAsset extends TestCase {
 			->once()
 			->withSomeOfArgs( 'machine-learning-block' );
 
-		WP_Mock::userFunction( 'wp_enqueue_script' )
-			->once()
-			->withSomeOfArgs( 'machine-learning-front-end' );
-
 		$this->instance->enqueue_block_editor_scripts();
 
 	}
