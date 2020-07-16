@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classNames from 'classnames';
-import memoize from 'memize';
 import * as React from 'react';
 import '@tensorflow/tfjs';
 import * as qna from '@tensorflow-models/qna';
@@ -39,13 +38,14 @@ const Question = ( { category, className, postId, textSource } ) => {
 	const [ question, setQuestion ] = useState( '' );
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ answer, setAnswer ] = useState( '' );
+	const [ model, setModel ] = useState( {} );
 
 	/**
 	 * Gets the text to search for the answer to the question.
 	 *
 	 * @return {Promise<string>} The text to search for the answer to the question.
 	 */
-	const getTextToSearch = memoize( async () => {
+	const getTextToSearch = async () => {
 		if ( 'category' === textSource && !! category ) {
 			const result = await apiFetch( {
 				path: addQueryArgs(
@@ -72,27 +72,28 @@ const Question = ( { category, className, postId, textSource } ) => {
 
 		// @ts-ignore
 		return result.content && result.content.rendered ? result.content.rendered : '';
-	} );
+	};
 
-	/**
-	 * Gets the TensorFlow model.
-	 *
-	 * @return Promise<qna.QuestionAndAnswer> The question and answer model.
-	 */
-	const getModel = memoize( async () => {
-		return await qna.load();
-	} );
+	const getModel = async () => {
+		if ( model.hasOwnProperty( 'model' ) ) {
+			return model;
+		}
+
+		const newModel = await qna.load();
+		setModel( newModel );
+		return newModel;
+	};
 
 	/**
 	 * Submits the question and sets the answer.
 	 */
 	const submitQuestion = async () => {
 		setIsLoading( true );
+		const ownModel = await getModel();
 		const textToSearch = await getTextToSearch();
 
 		if ( textToSearch ) {
-			const model = await getModel();
-			const newAnswers = await model.findAnswers( question, textToSearch );
+			const newAnswers = await ownModel.findAnswers( question, textToSearch );
 			if ( newAnswers[ 0 ] && newAnswers[ 0 ].text ) {
 				setAnswer( newAnswers[ 0 ].text );
 			} else {

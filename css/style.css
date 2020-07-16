@@ -3,6 +3,10 @@
 	margin-top: 1rem;
 }
 
+.machine-learning-block input {
+	min-width: 30rem;
+}
+
 .machine-learning-block button[disabled] {
 	cursor: not-allowed;
 	opacity: 0.4;

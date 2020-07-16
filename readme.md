@@ -4,8 +4,8 @@ A question block, using [TensorFlow](https://www.tensorflow.org/) to find an ans
 
 **Contributors:** [ryankienstra](https://profiles.wordpress.org/ryankienstra)
 **Tags:** [blocks](https://wordpress.org/plugins/tags/blocks), [machine-learning](https://wordpress.org/plugins/tags/survey)
-**Requires at least:** 5.0
-**Tested up to:** 5.3
+**Requires at least:** 5.2
+**Tested up to:** 5.4
 **Stable tag:** 0.1.0
 **License:** [GPLv3](http://www.gnu.org/licenses/gpl-3.0.html)
 **Donate link:** http://jdrf.org/get-involved/ways-to-donate/
@@ -15,7 +15,7 @@ A question block, using [TensorFlow](https://www.tensorflow.org/) to find an ans
 
 ## Description ##
 
-This is a demo of rendering a block with React on the front-end.
+The Question block answers your questions, based on content on the site.
 
 ## Installation ##
 
