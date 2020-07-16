@@ -80,7 +80,12 @@ class TestBlock extends TestCase {
 			->once()
 			->andReturn( $post );
 
+		WP_Mock::userFunction( 'is_admin' )
+			->once()
+			->andReturn( false );
 		WP_Mock::userFunction( 'wp_enqueue_script' )
+			->once();
+		WP_Mock::userFunction( 'wp_enqueue_style' )
 			->once();
 		WP_Mock::userFunction( 'wp_json_encode' )
 			->once();

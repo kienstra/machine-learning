@@ -87,12 +87,18 @@ class Block {
 		$post                 = get_post();
 		$attributes['postId'] = $post->ID;
 
-		$this->plugin->components->Asset->enqueue_script( Asset::FRONT_END_SCRIPT_SLUG );
-		wp_add_inline_script(
-			$this->plugin->components->Asset->get_prefixed_slug( Asset::FRONT_END_SCRIPT_SLUG ),
-			$this->get_inline_script( $attributes ),
-			'before'
-		);
+		$this->plugin->components->Asset->enqueue_style( Asset::STYLE_SLUG );
+
+		// The script that loads the Machine Learning model isn't needed in the block editor.
+		if ( ! is_admin() ) {
+			$this->plugin->components->Asset->enqueue_script( Asset::FRONT_END_SCRIPT_SLUG );
+
+			wp_add_inline_script(
+				$this->plugin->components->Asset->get_prefixed_slug( Asset::FRONT_END_SCRIPT_SLUG ),
+				$this->get_inline_script( $attributes ),
+				'before'
+			);
+		}
 
 		ob_start();
 		?>

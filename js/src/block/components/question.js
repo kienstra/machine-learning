@@ -11,6 +11,7 @@ import * as qna from '@tensorflow-models/qna';
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
+import { Spinner } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { addQueryArgs } from '@wordpress/url';
@@ -112,9 +113,13 @@ const Question = ( { category, className, postId, textSource } ) => {
 					setQuestion( event.target.value );
 				} }
 			/>
-			<button onClick={ submitQuestion }>
+			<button
+				disabled={ isLoading }
+				onClick={ submitQuestion }
+			>
 				{ __( 'Get the answer', 'machine-learning' ) }
 			</button>
+			{ isLoading && <Spinner /> }
 			{ !! answer && ! isLoading && (
 				<>
 					<h4>{ __( 'Answer', 'machine-learning' ) }</h4>
