@@ -41,6 +41,39 @@ const Question = ( { category, className, postId, textSource } ) => {
 	const [ model, setModel ] = useState( {} );
 
 	/**
+	 * Strips tags in markup and removes linebreaks, mainly taken from CSS Tricks.
+	 *
+	 * @see https://css-tricks.com/snippets/javascript/strip-html-tags-in-javascript/
+	 *
+	 * @param {string} markup The markup
+	 * @return {string} Text without tags or linebreaks.
+	 */
+	const normalizeText = ( markup ) => {
+		return markup
+			.replace( /(<([^>]+)>)/ig, '' )
+			.replace( /(\r\n|\n|\r)/gm, ' ' );
+	};
+
+	/**
+	 * Gets the model to use for the question.
+	 *
+	 * First looks in the state for the stored model.
+	 * If it's not there, it loads it, stores that in the state, and returns it.
+	 * This enables loading the model lazily, instead of on every page load.
+	 *
+	 * @return {Promise<qna.QuestionAndAnswer|Object>} The model.
+	 */
+	const getModel = async () => {
+		if ( model.hasOwnProperty( 'model' ) ) {
+			return model;
+		}
+
+		const newModel = await qna.load();
+		setModel( newModel );
+		return newModel;
+	};
+
+	/**
 	 * Gets the text to search for the answer to the question.
 	 *
 	 * @return {Promise<string>} The text to search for the answer to the question.
@@ -60,7 +93,7 @@ const Question = ( { category, className, postId, textSource } ) => {
 
 			return result.reduce( ( accumulator, currentValue ) => {
 				if ( currentValue.content && currentValue.content.rendered ) {
-					return accumulator + currentValue.content.rendered;
+					return accumulator + normalizeText( currentValue.content.rendered );
 				}
 				return accumulator;
 			}, '' );
@@ -71,17 +104,7 @@ const Question = ( { category, className, postId, textSource } ) => {
 		} );
 
 		// @ts-ignore
-		return result.content && result.content.rendered ? result.content.rendered : '';
-	};
-
-	const getModel = async () => {
-		if ( model.hasOwnProperty( 'model' ) ) {
-			return model;
-		}
-
-		const newModel = await qna.load();
-		setModel( newModel );
-		return newModel;
+		return result.content && result.content.rendered ? normalizeText( result.content.rendered ) : '';
 	};
 
 	/**
