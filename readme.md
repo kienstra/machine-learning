@@ -15,7 +15,13 @@ A question block, using [TensorFlow](https://www.tensorflow.org/) to find an ans
 
 ## Description ##
 
-The Question block answers your questions, based on content on the site.
+The Machine Learning Question block answers your questions, based on content on the site.
+
+![answer-question-block](https://user-images.githubusercontent.com/4063887/87750352-d4705000-c7c0-11ea-90fe-e3b321d81656.gif)
+
+Get an answer based on the current post, or posts in a category.
+
+Uses the [TensorFlow](https://www.tensorflow.org/) [BERT model](https://blog.tensorflow.org/2020/03/exploring-helpful-uses-for-bert-in-your-browser-tensorflow-js.html), a pre-trained NLP model. This runs in the browser, analyzing text that you choose.
 
 ## Installation ##
 
