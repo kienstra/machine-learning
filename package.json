@@ -20,7 +20,7 @@
 	"directories": {
 		"test": "tests"
 	},
-	"devDependencies": {
+	"peerDependencies": {
 		"@tensorflow-models/qna": "1.0.0",
 		"@tensorflow/tfjs": "2.0.1",
 		"@testing-library/jest-dom": "5.11.0",
