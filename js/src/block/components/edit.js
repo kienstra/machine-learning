@@ -8,7 +8,6 @@ import classNames from 'classnames';
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
-import { BlockEditProps } from '@wordpress/blocks';
 import { Button, PanelBody, SelectControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useState } from '@wordpress/element';
@@ -21,15 +20,18 @@ import { BLOCK_CLASS } from '../constants';
 
 /**
  * @typedef {Object} EditAttributes The block attributes.
- * @property {string} category The category to get the text from.
- * @property {string} className The name of the class.
+ * @property {string} category   The category to get the text from.
+ * @property {string} className  The name of the class.
  * @property {string} textSource The source of the text.
  */
 
 /**
  * The Edit component for the block.
  *
- * @param {BlockEditProps<EditAttributes>} props The component props.
+ * @param {{
+ *   attributes: EditAttributes,
+ *   setAttributes: Function,
+ * }} props The component props.
  * @return {React.ReactElement} The Edit component of the block.
  */
 const Edit = ( {

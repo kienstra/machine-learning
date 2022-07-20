@@ -22,9 +22,9 @@ import { BLOCK_CLASS } from '../constants';
 
 /**
  * @typedef {Object} QuestionProps The Edit component props.
- * @property {string} category The category ID.
- * @property {string} className The class name.
- * @property {number} postId The current post ID.
+ * @property {string} category   The category ID.
+ * @property {string} className  The class name.
+ * @property {number} postId     The current post ID.
  * @property {string} textSource The text source.
  */
 
