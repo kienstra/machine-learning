@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import * as React from 'react';
 import classNames from 'classnames';
 
 /**
@@ -10,7 +9,7 @@ import classNames from 'classnames';
 import apiFetch from '@wordpress/api-fetch';
 import { Button, PanelBody, SelectControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useState } from '@wordpress/element';
+import * as React from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -32,7 +31,6 @@ import { BLOCK_CLASS } from '../constants';
  *   attributes: EditAttributes,
  *   setAttributes: Function,
  * }} props The component props.
- * @return {React.ReactElement} The Edit component of the block.
  */
 const Edit = ( {
 	attributes: {
@@ -43,9 +41,9 @@ const Edit = ( {
 	setAttributes,
 } ) => {
 	const categoryTextSource = 'category';
-	const [ categories, setCategories ] = useState( [] );
+	const [ categories, setCategories ] = React.useState( [] );
 
-	useEffect( () => {
+	React.useEffect( () => {
 		let isMounted = true;
 
 		apiFetch( {

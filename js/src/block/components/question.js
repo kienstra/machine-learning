@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classNames from 'classnames';
-import * as React from 'react';
 import '@tensorflow/tfjs';
 import * as qna from '@tensorflow-models/qna';
 
@@ -11,7 +10,7 @@ import * as qna from '@tensorflow-models/qna';
  */
 import apiFetch from '@wordpress/api-fetch';
 import { Spinner } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import * as React from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { addQueryArgs } from '@wordpress/url';
 
@@ -32,13 +31,12 @@ import { BLOCK_CLASS } from '../constants';
  * The Edit component for the block.
  *
  * @param {QuestionProps} props The component props.
- * @return {React.ReactElement} The question component.
  */
 const Question = ( { category, className, postId, textSource } ) => {
-	const [ question, setQuestion ] = useState( '' );
-	const [ isLoading, setIsLoading ] = useState( false );
-	const [ answer, setAnswer ] = useState( '' );
-	const [ model, setModel ] = useState( {} );
+	const [ question, setQuestion ] = React.useState( '' );
+	const [ isLoading, setIsLoading ] = React.useState( false );
+	const [ answer, setAnswer ] = React.useState( '' );
+	const [ model, setModel ] = React.useState( {} );
 
 	/**
 	 * Gets the model to use for the question.
