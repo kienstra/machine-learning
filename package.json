@@ -1,5 +1,5 @@
 {
-	"name": "machine-learning",
+	"name": "@kienstra/machine-learning",
 	"version": "0.1.0",
 	"description": "Adds a machine learning block.",
 	"author": "Ryan Kienstra",
