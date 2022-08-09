@@ -2,7 +2,7 @@
  * External dependencies
  */
 import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 /**
  * Internal dependencies
@@ -30,6 +30,6 @@ test( 'question block', async () => {
 		setAttributes: jest.fn(),
 	};
 
-	const { getByLabelText } = render( <Edit { ...props } /> );
-	expect( getByLabelText( 'Analyze text from' ) ).toBeInTheDocument();
+	render( <Edit { ...props } /> );
+	expect( screen.getByLabelText( 'Analyze text from' ) ).toBeInTheDocument();
 } );
