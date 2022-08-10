@@ -29,7 +29,7 @@ import { BLOCK_CLASS } from '../constants';
  *
  * @param {{
  *   attributes: EditAttributes,
- *   setAttributes: Function,
+ *   setAttributes: Function
  * }} props The component props.
  */
 const Edit = ( {

@@ -30,5 +30,5 @@ test( 'question block', async () => {
 	};
 
 	render( <Edit { ...props } /> );
-	expect( screen.getByLabelText( 'Analyze text from' ) ).toBeInTheDocument();
+	expect( screen.getByLabelText( /analyze text from/i ) ).toBeInTheDocument();
 } );

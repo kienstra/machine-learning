@@ -19,5 +19,5 @@ test( 'question block', () => {
 	};
 
 	render( <Question { ...props } /> );
-	expect( screen.getByText( 'Ask a question' ) ).toBeInTheDocument();
+	expect( screen.getByText( /ask a question/i ) ).toBeInTheDocument();
 } );
