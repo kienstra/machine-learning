@@ -9,11 +9,13 @@ jobs:
     docker:
       - image: cimg/node:14.19
     steps:
+      - checkout
       - run: npm ci && npm run lint:js
   test-js:
     docker:
       - image: cimg/node:14.19
     steps:
+      - checkout
       - run: npm ci && npm run test:js
   test-php:
     docker:
