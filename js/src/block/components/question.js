@@ -27,7 +27,7 @@ import { BLOCK_CLASS } from '../constants';
  *   className: string,
  *   postId: number,
  *   textSource: string
- * }} props The component props.
+ * }} props
  */
 const Question = ( { category, className, postId, textSource } ) => {
 	const [ question, setQuestion ] = React.useState( '' );

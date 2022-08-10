@@ -27,7 +27,7 @@ import { BLOCK_CLASS } from '../constants';
  *     textSource: string
  *   },
  *   setAttributes: Function
- * }} props The component props.
+ * }} props
  */
 const Edit = ( {
 	attributes: {
