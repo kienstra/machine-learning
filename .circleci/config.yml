@@ -10,6 +10,11 @@ jobs:
       - image: cimg/node:14.19
     steps:
       - run: npm ci && npm run lint:js
+  test-js:
+    docker:
+      - image: cimg/node:14.19
+    steps:
+      - run: npm ci && npm run test:js
   test-php:
     docker:
       - image: cimg/php:7.4-node
@@ -23,8 +28,6 @@ jobs:
 workflows:
   build:
     jobs:
-      - node/run:
-          npm-run: lint:js
-      - node/run:
-          npm-run: test:js
+      - lint-js
+      - test-js
       - test-php
