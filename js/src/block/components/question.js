@@ -98,7 +98,7 @@ const Question = ( { category, className, postId, textSource } ) => {
 
 		if ( textToSearch ) {
 			const newAnswers = await ownModel.findAnswers( question, textToSearch );
-			if ( newAnswers[ 0 ] && newAnswers[ 0 ].text ) {
+			if ( newAnswers[ 0 ]?.text ) {
 				setAnswer( newAnswers[ 0 ].text );
 			} else {
 				setAnswer( __( 'Sorry, no answer found', 'machine-learning' ) );

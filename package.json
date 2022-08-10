@@ -20,11 +20,13 @@
 	"directories": {
 		"test": "tests"
 	},
-	"devDependencies": {
+	"dependencies": {
 		"@tensorflow-models/qna": "1.0.1",
 		"@tensorflow/tfjs": "2.8.6",
 		"@tensorflow/tfjs-converter": "3.19.0",
-		"@tensorflow/tfjs-core": "3.19.0",
+		"@tensorflow/tfjs-core": "3.19.0"
+	},
+	"devDependencies": {
 		"@testing-library/jest-dom": "5.16.2",
 		"@testing-library/react": "12.1.3",
 		"@testing-library/user-event": "13.5.0",
