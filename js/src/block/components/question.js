@@ -20,17 +20,14 @@ import { addQueryArgs } from '@wordpress/url';
 import { BLOCK_CLASS } from '../constants';
 
 /**
- * @typedef {Object} QuestionProps The Edit component props.
- * @property {string} category   The category ID.
- * @property {string} className  The class name.
- * @property {number} postId     The current post ID.
- * @property {string} textSource The text source.
- */
-
-/**
  * The Edit component for the block.
  *
- * @param {QuestionProps} props The component props.
+ * @param {{
+ *   category: string,
+ *   className: string,
+ *   postId: number,
+ *   textSource: string
+ * }} props The component props.
  */
 const Question = ( { category, className, postId, textSource } ) => {
 	const [ question, setQuestion ] = React.useState( '' );
