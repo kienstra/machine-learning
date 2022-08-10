@@ -56,7 +56,7 @@ const Edit = ( {
 					} )
 				);
 			}
-		} );
+		} ).catch( () => {} );
 
 		return function cleanUp() {
 			isMounted = false;
