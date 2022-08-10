@@ -18,17 +18,14 @@ import { __ } from '@wordpress/i18n';
 import { BLOCK_CLASS } from '../constants';
 
 /**
- * @typedef {Object} EditAttributes The block attributes.
- * @property {string} category   The category to get the text from.
- * @property {string} className  The name of the class.
- * @property {string} textSource The source of the text.
- */
-
-/**
  * The Edit component for the block.
  *
  * @param {{
- *   attributes: EditAttributes,
+ *   attributes: {
+ *     category: string,
+ *     className: string,
+ *     textSource: string
+ *   },
  *   setAttributes: Function
  * }} props The component props.
  */
