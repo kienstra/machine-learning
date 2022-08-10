@@ -11,7 +11,7 @@ A question block, using [TensorFlow](https://www.tensorflow.org/) to find an ans
 **Donate link:** http://jdrf.org/get-involved/ways-to-donate/
 **Requires PHP:** 7.1
 
-[![Build Status](https://travis-ci.org/kienstra/machine-learning.svg?branch=master)](https://travis-ci.org/kienstra/machine-learning) [![Built with Grunt](https://gruntjs.com/cdn/builtwith.svg)](http://gruntjs.com)
+[![kienstra](https://circleci.com/gh/kienstra/machine-learning.svg?style=svg)](https://github.com/kienstra/machine-learning)
 
 ## Description ##
 
