@@ -34,6 +34,7 @@
 		"@wordpress/e2e-test-utils": "7.11.0",
 		"@wordpress/editor": "12.14.0",
 		"@wordpress/element": "4.13.0",
+		"@wordpress/env": "5.1.0",
 		"@wordpress/eslint-plugin": "12.9.0",
 		"@wordpress/i18n": "4.15.0",
 		"@wordpress/rich-text": "5.13.0",
