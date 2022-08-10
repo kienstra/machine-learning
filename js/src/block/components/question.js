@@ -2,7 +2,6 @@
  * External dependencies
  */
 import classNames from 'classnames';
-import * as React from 'react';
 import '@tensorflow/tfjs';
 import * as qna from '@tensorflow-models/qna';
 
@@ -11,7 +10,7 @@ import * as qna from '@tensorflow-models/qna';
  */
 import apiFetch from '@wordpress/api-fetch';
 import { Spinner } from '@wordpress/components';
-import { useState } from '@wordpress/element';
+import * as React from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { addQueryArgs } from '@wordpress/url';
 
@@ -21,24 +20,20 @@ import { addQueryArgs } from '@wordpress/url';
 import { BLOCK_CLASS } from '../constants';
 
 /**
- * @typedef {Object} QuestionProps The Edit component props.
- * @property {string} category The category ID.
- * @property {string} className The class name.
- * @property {number} postId The current post ID.
- * @property {string} textSource The text source.
- */
-
-/**
  * The Edit component for the block.
  *
- * @param {QuestionProps} props The component props.
- * @return {React.ReactElement} The question component.
+ * @param {{
+ *   category: string,
+ *   className: string,
+ *   postId: number,
+ *   textSource: string
+ * }} props
  */
 const Question = ( { category, className, postId, textSource } ) => {
-	const [ question, setQuestion ] = useState( '' );
-	const [ isLoading, setIsLoading ] = useState( false );
-	const [ answer, setAnswer ] = useState( '' );
-	const [ model, setModel ] = useState( {} );
+	const [ question, setQuestion ] = React.useState( '' );
+	const [ isLoading, setIsLoading ] = React.useState( false );
+	const [ answer, setAnswer ] = React.useState( '' );
+	const [ model, setModel ] = React.useState( {} );
 
 	/**
 	 * Gets the model to use for the question.
@@ -103,7 +98,7 @@ const Question = ( { category, className, postId, textSource } ) => {
 
 		if ( textToSearch ) {
 			const newAnswers = await ownModel.findAnswers( question, textToSearch );
-			if ( newAnswers[ 0 ] && newAnswers[ 0 ].text ) {
+			if ( newAnswers[ 0 ]?.text ) {
 				setAnswer( newAnswers[ 0 ].text );
 			} else {
 				setAnswer( __( 'Sorry, no answer found', 'machine-learning' ) );

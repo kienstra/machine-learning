@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import '@testing-library/jest-dom/extend-expect';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 /**
  * Internal dependencies
@@ -19,6 +18,6 @@ test( 'question block', () => {
 		},
 	};
 
-	const { getByText } = render( <Question { ...props } /> );
-	expect( getByText( 'Ask a question' ) ).toBeInTheDocument();
+	render( <Question { ...props } /> );
+	expect( screen.getByText( /ask a question/i ) ).toBeInTheDocument();
 } );

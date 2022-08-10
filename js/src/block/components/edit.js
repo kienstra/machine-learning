@@ -1,17 +1,15 @@
 /**
  * External dependencies
  */
-import * as React from 'react';
 import classNames from 'classnames';
 
 /**
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
-import { BlockEditProps } from '@wordpress/blocks';
 import { Button, PanelBody, SelectControl } from '@wordpress/components';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useState } from '@wordpress/element';
+import * as React from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
@@ -20,17 +18,16 @@ import { __ } from '@wordpress/i18n';
 import { BLOCK_CLASS } from '../constants';
 
 /**
- * @typedef {Object} EditAttributes The block attributes.
- * @property {string} category The category to get the text from.
- * @property {string} className The name of the class.
- * @property {string} textSource The source of the text.
- */
-
-/**
  * The Edit component for the block.
  *
- * @param {BlockEditProps<EditAttributes>} props The component props.
- * @return {React.ReactElement} The Edit component of the block.
+ * @param {{
+ *   attributes: {
+ *     category: string,
+ *     className: string,
+ *     textSource: string
+ *   },
+ *   setAttributes: Function
+ * }} props
  */
 const Edit = ( {
 	attributes: {
@@ -41,9 +38,9 @@ const Edit = ( {
 	setAttributes,
 } ) => {
 	const categoryTextSource = 'category';
-	const [ categories, setCategories ] = useState( [] );
+	const [ categories, setCategories ] = React.useState( [] );
 
-	useEffect( () => {
+	React.useEffect( () => {
 		let isMounted = true;
 
 		apiFetch( {
@@ -56,7 +53,7 @@ const Edit = ( {
 					} )
 				);
 			}
-		} );
+		} ).catch( () => {} );
 
 		return function cleanUp() {
 			isMounted = false;

@@ -1,0 +1,33 @@
+version: 2.1
+
+jobs:
+  lint-js:
+    docker:
+      - image: cimg/node:14.19
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run lint:js
+  test-js:
+    docker:
+      - image: cimg/node:14.19
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run test:js
+  test-php:
+    docker:
+      - image: cimg/php:7.4-node
+    steps:
+      - checkout
+      - run: npm ci
+      - run: composer install
+      - run: npm run build
+      - run: composer test
+
+workflows:
+  build:
+    jobs:
+      - lint-js
+      - test-js
+      - test-php
