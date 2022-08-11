@@ -5,6 +5,22 @@ orbs:
   php: circleci/php@1.1
 
 jobs:
+  lint-js:
+    docker:
+      - image: cimg/node:14.19
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run lint:js
+    resource_class: large
+  test-js:
+    docker:
+      - image: cimg/node:14.19
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run test:js
+    resource_class: large
   test-php:
     docker:
       - image: cimg/php:7.4-node
@@ -19,8 +35,6 @@ jobs:
 workflows:
   build:
     jobs:
-      - node/run:
-          npm-run: lint:js
-      - node/run:
-          npm-run: test:js
+      - lint-js
+      - test-js
       - test-php
