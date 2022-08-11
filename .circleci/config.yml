@@ -12,6 +12,7 @@ jobs:
       - checkout
       - node/install-packages
       - run: npm run lint:js
+    resource_class: large
   test-js:
     docker:
       - image: cimg/node:14.19
@@ -19,6 +20,7 @@ jobs:
       - checkout
       - node/install-packages
       - run: npm run test:js
+    resource_class: large
   test-php:
     docker:
       - image: cimg/php:7.4-node
@@ -28,6 +30,7 @@ jobs:
       - php/install-packages
       - run: npm run build
       - run: composer test
+    resource_class: large
 
 workflows:
   build:
