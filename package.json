@@ -23,10 +23,11 @@
 	"files": [
 		"readme.md",
 		"LICENSE",
+		"vendor",
 		"machine-learning.php",
 		"php",
-		"vendor",
-		"js/dist"
+		"js/dist",
+		"css"
 	],
 	"dependencies": {
 		"@tensorflow-models/qna": "1.0.1",
