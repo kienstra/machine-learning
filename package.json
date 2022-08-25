@@ -20,6 +20,14 @@
 	"directories": {
 		"test": "tests"
 	},
+	"files": [
+		"readme.md",
+		"LICENSE",
+		"machine-learning.php",
+		"php",
+		"vendor",
+		"js/dist"
+	],
 	"dependencies": {
 		"@tensorflow-models/qna": "1.0.1",
 		"@tensorflow/tfjs": "2.8.6",
@@ -40,17 +48,20 @@
 		"@wordpress/eslint-plugin": "12.9.0",
 		"@wordpress/i18n": "4.15.0",
 		"@wordpress/rich-text": "5.13.0",
-		"@wordpress/scripts": "23.7.0",
+		"@wordpress/scripts": "^23.5.0",
 		"@wordpress/url": "3.16.0",
 		"classnames": "2.3.1",
 		"eslint": "^8.21.0",
 		"eslint-plugin-eslint-comments": "^3.2.0",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
+		"glob": "8.0.3",
 		"husky": "4.3.8",
+		"npm-packlist": "5.1.2",
 		"puppeteer": "16.1.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
+		"tar": "6.1.11",
 		"typescript": "4.7.4",
 		"webpack": "^5.74.0",
 		"webpack-cli": "^4.10.0"
@@ -69,6 +80,7 @@
 		"lint:php": "vendor/bin/phpcs",
 		"lint:php:fix": "vendor/bin/phpcbf",
 		"packages-update": "wp-scripts packages-update",
+		"zip": "wp-scripts plugin-zip",
 		"test:e2e": "wp-scripts test-e2e --config=tests/e2e/jest.config.js --runInBand",
 		"test:e2e:interactive": "npm run test:e2e -- --puppeteer-interactive",
 		"test:e2e:update-snapshot": "npm run test:e2e -- --updateSnapshot",
