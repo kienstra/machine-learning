@@ -5,5 +5,5 @@ updates:
     schedule:
       interval: "daily"
     ignore:
-      - dependency-type: "development"
-        dependency-name: "*"
+      - dependency-name: "*"
+        dependency-type: "development"
